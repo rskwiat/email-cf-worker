@@ -1,11 +1,21 @@
-import { Hono } from 'hono'
+import { createApp } from './lib/create-app';
 
-const app = new Hono()
+const app = createApp();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!, testing app')
-})
+app.get('/healthcheck', (c) => {
+  return c.json({
+    'message': 'OK',
+    'status': 200,
+  })
+});
 
-
+app.post('/echo', async (c) => {
+  const body = await c.req.json();
+  return c.json({
+    'message': 'OK',
+    'status': 200,
+    'data': body,
+  })
+});
 
 export default app

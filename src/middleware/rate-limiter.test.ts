@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { rateLimiter, _clearStoreForTesting } from "./rate-limiter";
+import { _clearStoreForTesting, rateLimiter } from "./rate-limiter";
 
 describe("rateLimiter middleware", () => {
 	beforeEach(() => {

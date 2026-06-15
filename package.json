@@ -1,15 +1,31 @@
 {
-  "name": "email-cf-worker",
-  "type": "module",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
-  },
-  "dependencies": {
-    "hono": "^4.12.25"
-  },
-  "devDependencies": {
-    "wrangler": "^4.100.0"
-  }
+	"name": "email-cf-worker",
+	"type": "module",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy --minify",
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"test": "vitest",
+		"lint": "npx @biomejs/biome lint --write ./src",
+		"prepare": "husky"
+	},
+	"dependencies": {
+		"hono": "^4.12.25"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.4.0",
+		"vitest": "^4.1.8",
+		"wrangler": "^4.100.0"
+	},
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css}": [
+			"biome check --files-ignore-unknown=true",
+			"biome check --write --no-errors-on-unmatched",
+			"biome check --write --unsafe --no-errors-on-unmatched",
+			"biome format --write --no-errors-on-unmatched",
+			"biome lint --write --no-errors-on-unmatched"
+		]
+	}
 }

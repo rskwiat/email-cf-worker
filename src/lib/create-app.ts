@@ -10,6 +10,7 @@ export function createApp() {
   });
 
   app.onError((err, c) => {
+    console.log('error');
     return c.json({
       message: err.message
     }, 500);
